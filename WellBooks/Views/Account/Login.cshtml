@@ -1,0 +1,39 @@
+﻿@model WellBooks.ViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<partial name="_Notification"/>
+<form method="post" asp-action="Login" style="max-width:480px; margin: auto;">
+    <div class="border mt-4 p-3 text-center">
+        <div class="row pb-3">
+            <h2 class="text-center text-white">Identificação</h2>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-floating text-dark">
+            <input asp-for="@Model.Email" class="form-control" placeholder="nome@exemplo.com">
+            <label asp-for="@Model.Email">Email</label>
+        </div>
+        <span class="form-text text-danger" asp-validation-for="@Model.Email"></span>
+        <div class="form-floating mt-2 text-dark">
+            <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Senha">
+            <label asp-for="@Model.Password">Senha</label>
+        </div>
+        <span class="form-text text-danger mb-2" asp-validation-for="@Model.Password"></span>
+        <div class="form-switch text-start">
+            <input asp-for="@Model.RememberMe" class="form-check-input"/>
+            <label asp-for="@Model.RememberMe" class="text-white">Lembrar?</label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-lg btn-outline-success">Continuar</button>
+        </div>
+        <div class="text-start">
+            <a asp-action="Login" asp-controller="Account" class="text-info">Crie sua conta</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
