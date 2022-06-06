@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WellBooks.Models.Enums;
 
 namespace WellBooks.Models
@@ -9,6 +10,7 @@ namespace WellBooks.Models
         public int Id { get; set; }
         public DateTime Moment { get; set; }
         public OrderStatus Status { get; set; }
+        [NotMapped]
         public List<OrderDetail> Details { get; set; }
 
         public double GetTotalPrice()
@@ -21,4 +23,5 @@ namespace WellBooks.Models
             return total;
         }
     }
+   
 }
