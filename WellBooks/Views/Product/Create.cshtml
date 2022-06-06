@@ -1,0 +1,49 @@
+﻿@model WellBooks.ViewModels.ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-action="Create" style="max-width:480px; margin: auto;">
+    <div class="border mt-4 p-3 text-center">
+        <div class="row pb-3">
+            <h2 class="text-center text-white">Criar novo produto</h2>
+        </div>
+        <div class="form-floating text-dark">
+            <input asp-for="Name" class="form-control">
+            <label asp-for="Name">Nome</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Name"></span>
+        <div class="form-floating text-dark">
+            <input asp-for="Price" class="form-control" type="number">
+            <label asp-for="Price">Preço R$</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Price"></span>
+        <div class="form-floating text-dark">
+            <textarea asp-for="Description" class="form-control" rows="4" maxlength="255"></textarea>
+            <label asp-for="Description">Descrição</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Description"></span>
+        <div class="form-floating text-dark">
+            <input asp-for="ImgUrl" class="form-control" type="url">
+            <label asp-for="ImgUrl">Endereço da Imagem</label>
+        </div>
+        <span class="text-danger" asp-validation-for="ImgUrl"></span>
+        <select asp-for="Category" class="form-control bg-dark text-white">
+            @foreach(var cat in ViewBag.categories)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        </select>
+        <div class="mt-2">
+            <button type="submit" class="btn btn-outline-success">Criar produto</button>
+            <a asp-action="Index" asp-controller="Product" class="btn btn-info ms-2">Voltar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}

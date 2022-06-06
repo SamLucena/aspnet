@@ -4,6 +4,44 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalhes do Produto: @Model.Name</h1>
-<h2>@Model.Category.Name</h2>
+<div class="row justify-content-center">
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-6 d-none d-lg-block">
+                        <img src="@Model.ImgUrl" alt="@Model.Name" width="100%"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-1">@Model.Name</h1>
+                            </div>
+
+                            <div class="text-start">
+                                <p class="mb-1">@Model.Description</p>
+                            </div>
+
+                            <div class="text-start">
+                                <p class="small">Preço: R$ @Model.Price</p>
+                            </div>   
+                                    
+                            <hr>
+                            <div class="text-start">
+                                <button class="small btn btn-outline-info mb-2" disabled>Categoria: @Model.Category.Name</button>
+                            </div>
+                            <div>
+                                <a style="width:100%" class="btn btn-outline-success"><i class="bi bi-cart"></i> Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 

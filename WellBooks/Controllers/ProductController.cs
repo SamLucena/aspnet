@@ -7,6 +7,7 @@ using WellBooks.Models;
 
 namespace WellBooks.Controllers
 {
+    [Authorize(Policy = "EmployeeOnly")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -18,7 +19,7 @@ namespace WellBooks.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_db.Products);
         }
 
         [AllowAnonymous]
@@ -29,6 +30,36 @@ namespace WellBooks.Controllers
             
             return View(product);
         }
+
+        public IActionResult Create()
+        {
+            loadCatories();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(IFormCollection collection)
+        {
+            loadCatories();
+            Product product = new Product()
+            {
+                Name = collection["Name"].Single(),
+                Price = double.Parse(collection["Price"].Single()),
+                Description = collection["Description"].Single(),   
+                ImgUrl = collection["ImgUrl"].Single(),
+                Category = _db.Categories.Find(int.Parse(collection["Category"].Single()))
+            };
+            _db.Products.Add(product);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Product");
+        }
+
+        public void loadCatories()
+        {
+            ViewBag.categories = _db.Categories.ToList<Category>();
+        }
+
         //IFormCollection : Itens do formulário
     }
 }

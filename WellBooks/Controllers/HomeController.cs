@@ -21,12 +21,13 @@ namespace WellBooks.Controllers
             _db = db;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_db);
         }
 
-        [Authorize(Policy = "EmployeeOnly")]
+        [AllowAnonymous]
         public IActionResult About()
         {
             return View();
