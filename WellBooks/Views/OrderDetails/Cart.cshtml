@@ -4,23 +4,34 @@
     ViewData["Title"] = "Cart";
 }
 
-<div class="row">
-    <div class="text-end"> 
-        <p class="text-secondary">Total: R$ @Model.Order.GetTotalPrice()</p>
-    </div>
-</div>
-<div class="row">
-    @foreach(Product product in Model.Products.ToList<Product>())
+<partial name="_Notification"/>
+@if(Model.Products.Count != 0)
+{
+    
+    double total = 0.0;
+    foreach (var item in Model.Products)
     {
-        <div class="card col-sm-6 col-md-4 col-xl-3 mb-3 me-3 bg-dark rounded">
-            <img class="rounded card-img-top mt-3" src="@product.ImgUrl" alt="@product.Name"/>
-            <div class="d-flex flex-column align-items-center p-3">
-                <h3 class="text-white fw-bold mb-3 card-title">@product.Name</h3>
-                <p class="text-secondary text-start">@product.Description</p>
-                <div>
-                    <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id"><i class="bi bi-info-circle-fill"></i> Detalhes</a>
+        total += item.Price;
+    }
+    
+    <div class="row">
+        <div class="text-end"> 
+            <p class="text-secondary">Total: R$ @total</p>
+        </div>
+    </div>
+    <div class="row">
+        @foreach(Product product in Model.Products.ToList<Product>())
+        {
+            <div class="card col-sm-6 col-md-4 col-xl-3 mb-3 me-3 bg-dark rounded">
+                <div class="d-flex flex-column align-items-center p-3">
+                    <h3 class="text-white fw-bold mb-3 card-title">@product.Name</h3>
+                    <form method="post" asp-action="RemoveItem" asp-controller="OrderDetails">
+                         <button class="btn btn-danger"><i class="bi bi-x-circle-fill"></i></button>
+                    </form>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}else{
+    <h1>Adicione produtos!</h1>
+}
