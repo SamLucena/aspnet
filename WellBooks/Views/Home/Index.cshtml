@@ -16,7 +16,7 @@
                     <h3 class="text-white fw-bold mb-3 card-title">@product.Name</h3>
                     <p class="text-secondary text-start">@product.Description</p>
                     <div>
-                        <a class="btn btn-outline-primary me-3" asp-action="Cart" asp-controller="OrderDetails" asp-route-id="@product.Id"><i class="bi bi-cart"></i> Comprar</a>
+                        <a class="btn btn-outline-primary me-3" asp-action="Buy" asp-controller="OrderDetails" asp-route-id="@product.Id"><i class="bi bi-cart"></i> Comprar</a>
                         <a class="btn btn-outline-secondary" asp-action="Details" asp-controller="Product" asp-route-id="@product.Id"><i class="bi bi-info-circle-fill"></i> Detalhes</a>
                     </div>
                 </div>

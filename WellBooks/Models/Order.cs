@@ -12,7 +12,7 @@ namespace WellBooks.Models
         public OrderStatus Status { get; set; }
         public User User { get; set; }
         [NotMapped]
-        public List<OrderDetail> Details { get; set; }
+        public List<OrderDetail> Details { get; } = new List<OrderDetail>();
 
         public double GetTotalPrice()
         {

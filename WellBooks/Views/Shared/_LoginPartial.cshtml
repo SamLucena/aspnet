@@ -1,4 +1,6 @@
-﻿@if(User.HasClaim("Role", "employee")){
+﻿@using WellBooks.Utils
+@using WellBooks.ViewModels
+@if(User.HasClaim("Role", "employee")){
     <form method="post" asp-action="Logout" asp-controller="Account">
         <a asp-controller="Account" asp-action="Profile" class="btn btn-primary text-dark ml-2">
             <i class="bi bi-file-person"></i>
@@ -14,7 +16,7 @@
             <i class="bi bi-file-person"></i>
             <strong>@User.Identity.Name</strong>
         </a>
-        <a asp-controller="OrderDetails" asp-action="Cart" class="btn btn-info ml-2">
+        <a asp-controller="OrderDetails" asp-action="Index" class="btn btn-info ml-2">
             <i class="bi bi-bag"></i>
         </a>
         <button type="submit" class="ml-2 btn btn-outline-danger"><i class="bi bi-x-circle-fill"></i></button>
@@ -22,5 +24,5 @@
 }
 else{
     <a asp-controller="Account" asp-action="Register" class="btn btn-outline-info me-2">Criar conta</a>
-    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary"><i class="bi bi-box-arrow-in-right"></i></a>
+    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary"><i class="bi bi-person"></i> Entrar</a>
 }
