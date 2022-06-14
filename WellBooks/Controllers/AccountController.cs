@@ -22,6 +22,14 @@ namespace WellBooks.Controllers
         [Authorize]
         public IActionResult Profile()
         {
+            var orders = _db.Orders.Where(x => x.User.Email == User.Identity.Name).ToList();
+            var orderDetails = new OrderDetailRepository().FindByOrders(orders, _db);
+            var items = new List<Item>();
+            foreach(var orderDetail in orderDetails) {
+                items.Add(new Item() { Product = orderDetail.Product, Quantity = orderDetail.Amount });
+            }
+            ViewBag.Items = items;
+            ViewBag.Orders = orders;
             return View(_db.Users.Where(x => x.Email == User.Identity.Name).First());
         }
 

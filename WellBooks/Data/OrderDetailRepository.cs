@@ -23,5 +23,33 @@ namespace WellBooks.Data
                 
             }
         }
+
+        public List<OrderDetail> FindByOrders(List<Order> orders, ApplicationDbContext db)
+        {
+            connection.Open();
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            foreach (var order in orders)
+            {
+                cmd.CommandText = "SELECT * FROM OrderDetails WHERE OrderId = " + order.Id;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    
+                    var orderDetail = new OrderDetail()
+                    {
+                        Product = db.Products.Find(int.Parse(reader["ProductId"].ToString())),
+                        Order = order,
+                        Amount = int.Parse(reader["Amount"].ToString())
+                    };
+                    orderDetails.Add(orderDetail);
+                    order.Details.Add(orderDetail);
+                    
+                }
+            }
+            connection.Close();
+            return orderDetails;
+        }
     }
 }

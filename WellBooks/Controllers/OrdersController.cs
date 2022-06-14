@@ -54,5 +54,11 @@ namespace WellBooks.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize(Policy = "EmployeeOnly")]
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
