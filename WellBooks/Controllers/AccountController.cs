@@ -28,7 +28,6 @@ namespace WellBooks.Controllers
             foreach(var orderDetail in orderDetails) {
                 items.Add(new Item() { Product = orderDetail.Product, Quantity = orderDetail.Amount });
             }
-            ViewBag.Items = items;
             ViewBag.Orders = orders;
             return View(_db.Users.Where(x => x.Email == User.Identity.Name).First());
         }

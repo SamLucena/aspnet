@@ -36,17 +36,16 @@ namespace WellBooks.Data
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    
                     var orderDetail = new OrderDetail()
                     {
-                        Product = db.Products.Find(int.Parse(reader["ProductId"].ToString())),
                         Order = order,
+                        Product = db.Products.Find(int.Parse(reader["ProductId"].ToString())),
                         Amount = int.Parse(reader["Amount"].ToString())
                     };
                     orderDetails.Add(orderDetail);
                     order.Details.Add(orderDetail);
-                    
                 }
+                reader.Close();
             }
             connection.Close();
             return orderDetails;

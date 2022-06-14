@@ -40,10 +40,11 @@
         </form>
     </div>
     <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <table class="table table-bordered table-striped" style="width: 100%">
-            <thead>
-                @foreach (var order in ViewBag.Orders)
-                {
+       @foreach (var order in ViewBag.Orders)
+       {
+           <table class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                
                     <tr>
                         <th>Identificador # @order.Id</th>
                         <th>Total: R$@order.GetTotalPrice()</th>
@@ -65,22 +66,24 @@
                             }
                         </th>
                     </tr>
-                }
-            </thead>
-            <tbody>
-                @foreach(var item in ViewBag.Items){
-                    <tr>
-                        <td>@item.Product.Name <span class="d-block fw-bold">@item.Quantity un de R$ @item.Product.Price</span></td>
-                        <td><a class="btn btn-lg btn-success" asp-action="Details" asp-controller="Product" asp-route-id="@item.Product.Id">Ver detalhes do produto</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                
+                </thead>
+                <tbody>
+                    @foreach (var details in order.Details)
+                    {
+                        <tr>
+                            <td>@details.Product.Name <span class="d-block fw-bold">@details.Amount un de R$ @details.Product.Price</span></td>
+                            <td><a class="btn btn-lg btn-success" asp-action="Details" asp-controller="Product" asp-route-id="@details.Product.Id">Ver detalhes do produto</a></td>
+                        </tr>                      
+                    }
+                </tbody>
+           </table>
+       }
     </div>
 </div>
 
 @section Scripts{
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
 }
