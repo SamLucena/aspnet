@@ -20,6 +20,8 @@ namespace WellBooks.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.User.Identity.Name != _db.Users.Where(x => x.Email == User.Identity.Name).First().Email)
+                HttpContext.Session.Clear();
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             if(cart == null)
             {
