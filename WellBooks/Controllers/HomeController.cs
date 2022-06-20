@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using WellBooks.Data;
@@ -22,9 +23,39 @@ namespace WellBooks.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Index(int? categoryId)
         {
-            return View(_db);
+            ViewBag.Categories = _db.Categories;
+            if(categoryId == null)
+                ViewBag.Products = _db.Products;
+            else {
+                ViewBag.Products = _db.Products.Where(x => x.Category == _db.Categories.Find(categoryId));
+                var products = (IEnumerable<Product>)ViewBag.Products;
+                if (products.Any() == false)
+                {
+                    TempData["info"] = "Nenhum produto com essa categoria :(";
+                    ViewBag.Products = _db.Products;
+                }
+            }
+               
+                
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(IFormCollection collection)
+        {
+            var query = collection["query"];
+            ViewBag.Categories = _db.Categories;
+            ViewBag.Products = _db.Products.Where(x => x.Name.Contains(query));
+            var products = (IEnumerable<Product>)ViewBag.Products;
+            if (!products.Any())
+            {
+                TempData["info"] = "Nenhum produto encontrado!";
+                ViewBag.Products = _db.Products;
+            }
+            return View();
         }
 
         [AllowAnonymous]
