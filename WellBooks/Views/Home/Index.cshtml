@@ -10,7 +10,7 @@
     <div class="row">
         @foreach(Product product in Model.Products.ToList<Product>())
         {
-            <div class="card col-sm-6 col-md-4 col-xl-3 mb-3 me-3 bg-dark rounded">
+            <div class="col-sm-6 col-md-4 col-xl-3">
                 <img class="rounded card-img-top mt-3" src="@product.ImgUrl" alt="@product.Name"/>
                 <div class="d-flex flex-column align-items-center p-3">
                     <h3 class="text-white fw-bold mb-3 card-title">@product.Name</h3>

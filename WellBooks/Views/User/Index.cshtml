@@ -1,0 +1,52 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_Notification"/>
+<div class="row mb-3 pt-4">
+    <div class="col-6">
+        <a asp-controller="User" asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i> Novo Usuário
+        </a>
+    </div>
+    <div class="col-6 text-end">
+        <form method="post">
+            Buscar por: 
+            <button class="btn btn-primary" asp-action="Index" asp-controller="User" asp-route-role="employee">Funcionários</button>
+            ou
+            <button class="btn btn-primary" asp-action="Index" asp-controller="User" asp-route-role="customer">Clientes</button>
+            /
+            <button class="btn btn-primary" asp-action="Index" asp-controller="User">Todos</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    @foreach (var user in Model)
+    {
+        <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
+            <div class="d-flex flex-column align-items-center bg-dark rounded">
+                <h3 class="fw-bold text-white">@user.Name</h3>
+                <div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" asp-for="@user.Name" value="@user.Name" disabled>
+                        <label asp-for="@user.Name">Nome completo</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" asp-for="@user.Email" value="@user.Email" disabled>
+                        <label asp-for="@user.Email">Email</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" asp-for="@user.Password" value="@user.Password" disabled>
+                        <label asp-for="@user.Name">Senha</label>
+                    </div>
+                    <div class="mb-3">
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.Id">Deletar</a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    } 
+</div>
+

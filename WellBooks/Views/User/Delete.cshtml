@@ -1,0 +1,38 @@
+﻿@model WellBooks.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<form method="post" asp-action="RegisterAsync" style="max-width:480px">
+    <div class="mt-4 p-3 text-dark">
+        <div class="row pb-3">
+            <h2 class="text-danger">Delete o usuário :(</h2>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Nome completo" asp-for="Name" value="@Model.Name" disabled>
+            <label asp-for="Name">Nome completo</label>
+        </div>
+       
+        <div class="form-floating mt-2">
+            <input type="email" class="form-control" placeholder="nome@exemplo.com" asp-for="Email" value="@Model.Email" disabled>
+            <label asp-for="Email">Email</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="password" class="form-control" placeholder="Senha" asp-for="Password" value="@Model.Password" disabled>
+            <label asp-for="Password">Senha</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="text" class="form-control" placeholder="Função" asp-for="Role" value="@Model.Role" disabled>
+            <label asp-for="Role">Função do usuário</label>
+        </div>
+       
+        <div class="mt-2">
+            <button type="submit" class="btn btn-outline-danger me-2" asp-action="Delete" asp-controller="User">Deletar</button>
+            <a class="btn btn-success" asp-action="Index" asp-controller="User">Voltar para lista</a>
+        </div>
+    </div>
+</form>
+
+

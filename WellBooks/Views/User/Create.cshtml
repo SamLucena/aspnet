@@ -1,0 +1,56 @@
+﻿@model WellBooks.ViewModel.SignUpViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-action="RegisterAsync" style="max-width:480px">
+    <div class="mt-4 p-3 text-dark">
+        <div class="row pb-3">
+            <h2 class="text-info">Novo usuário :)</h2>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" placeholder="Nome completo" asp-for="Name">
+            <label asp-for="Name">Nome completo</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Name"></span>
+
+        <div class="form-floating mt-2">
+            <input type="email" class="form-control" placeholder="nome@exemplo.com" asp-for="Email">
+            <label asp-for="Email">Email</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Email"></span>
+
+        <div class="form-floating mt-2">
+            <input type="password" class="form-control" placeholder="Senha" asp-for="Password">
+            <label asp-for="Password">Senha</label>
+        </div>
+        <span class="text-danger" asp-validation-for="Password"></span>
+        <div class="form-floating mt-2">
+            <input type="password" class="form-control" placeholder="Confirme a senha" asp-for="PasswordConfirm">
+            <label asp-for="PasswordConfirm">Confirme a senha</label>
+        </div>
+        <span class="text-danger" asp-validation-for="PasswordConfirm"></span>
+ 
+        <select class="form-control bg-dark text-white mt-2" asp-for="Role">
+            <label asp-for="Role"> Selecione uma função</label>
+            <option value="customer">Cliente</option>
+            <option value="employee">Funcionário</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Role"></span>
+
+        <div class="mt-2">
+            <button type="submit" class="btn btn-outline-info me-2" asp-action="Create" asp-controller="User">Criar</button>
+            <a class="btn btn-success" asp-action="Index" asp-controller="User">Voltar para lista</a>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
+
