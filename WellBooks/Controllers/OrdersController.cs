@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WellBooks.Data;
 using WellBooks.Models;
 using WellBooks.Utils;
@@ -56,9 +57,14 @@ namespace WellBooks.Controllers
         }
 
         [Authorize(Policy = "EmployeeOnly")]
-        public IActionResult Index()
+        public IActionResult Index(string? orderby)
         {
-            return View();
+            if(orderby == "desc")
+            {
+                var orders = _db.Orders.OrderByDescending(x => x.Moment).Include(x => x.User);
+                return View(orders);
+            }
+            return View(_db.Orders.Include(x => x.User));
         }
     }
 }

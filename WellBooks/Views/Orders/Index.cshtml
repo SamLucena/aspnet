@@ -1,0 +1,66 @@
+﻿@using WellBooks.Models.Enums
+@model IEnumerable<Order>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row pt-4">
+    <div class="col-6">
+        <h2>Lista de Pedidos</h2>
+    </div>
+    <div class="col-6 text-end">
+        <div class="dropdown">
+            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filtrar</a>
+            <div class="dropdown-menu">
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="desc">Mais recente</a>
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="asc">Mais antigo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Número do pedido</th>
+            <th>Data (dd/MM/yyyy) HH:mm:ss</th>
+            <th>Status</th>
+            <th>Cliente</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model){
+            <tr>
+                <td width="20%">@obj.Id</td>
+                <td width="30%">@obj.Moment</td>
+                <td width="20%">
+                    @if(obj.Status == OrderStatus.PENDING){
+                        <span class="bg-primary rounded fw-bold text-center text-white p-1">Pendente</span>
+                    }
+                    else if(obj.Status == OrderStatus.SUCCESS){
+                        <span class="bg-success rounded fw-bold text-center text-white p-1">Confirmado</span>
+                    }
+                    else if(obj.Status == OrderStatus.WAITING){
+                        <span class="bg-danger rounded fw-bold text-center text-white p-1">Em espera</span>
+                    }
+                    else{
+                        <span class="bg-info rounded fw-bold text-center text-white p-1">Enviando pedido</span>
+                    }
+                </td>
+                <td width="30%">@obj.User.Name / @obj.User.Email</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Orders" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Orders" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-sm btn-outline-danger">Deletar</a>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

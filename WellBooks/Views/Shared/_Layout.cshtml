@@ -31,6 +31,10 @@
                   <a asp-action="About" asp-controller="Home" class="nav-link">Sobre</a>
                 </li>
               </ul>
+              <form class="d-flex me-3" asp-action="Index" asp-controller="Home">
+                <input class="form-control me-sm-2" type="text" placeholder="O que você deseja?" name="query">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" asp-action="Index" asp-controller="Home">Buscar</button>
+              </form>
               <partial name="_LoginPartial"/>
             </div>
           </div>
