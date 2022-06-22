@@ -33,7 +33,7 @@
                                 <button class="small btn btn-outline-info mb-2" disabled>Categoria: @Model.Category.Name</button>
                             </div>
                             <div>
-                                <a asp-action="Cart" asp-controller="OrderDetails" style="width:100%" class="btn btn-outline-success"><i class="bi bi-cart"></i> Comprar</a>
+                                <a asp-action="Buy" asp-controller="OrderDetails" asp-route-id="@Model.Id" style="width:100%" class="btn btn-outline-success"><i class="bi bi-cart"></i> Comprar</a>
                             </div>
                         </div>
                     </div>

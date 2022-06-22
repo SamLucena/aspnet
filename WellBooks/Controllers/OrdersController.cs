@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WellBooks.Data;
 using WellBooks.Models;
+using WellBooks.Models.Enums;
 using WellBooks.Utils;
 using WellBooks.ViewModels;
 
@@ -59,12 +60,48 @@ namespace WellBooks.Controllers
         [Authorize(Policy = "EmployeeOnly")]
         public IActionResult Index(string? orderby)
         {
-            if(orderby == "desc")
+            if(orderby == null) return View(_db.Orders.Include(x => x.User));
+            if (orderby == "desc")
             {
                 var orders = _db.Orders.OrderByDescending(x => x.Moment).Include(x => x.User);
                 return View(orders);
+            }else if(orderby == "success")
+            {
+                var orders = _db.Orders.Where(x => x.Status == OrderStatus.SUCCESS).Include(x => x.User);
+                return View(orders);
+            }else if (orderby == "waiting")
+            {
+                var orders = _db.Orders.Where(x => x.Status == OrderStatus.WAITING).Include(x => x.User);
+                return View(orders);
+            }else if (orderby == "pending")
+            {
+                var orders = _db.Orders.Where(x => x.Status == OrderStatus.PENDING).Include(x => x.User);
+                return View(orders);
+            }else if (orderby == "delivered")
+            {
+                var orders = _db.Orders.Where(x => x.Status == OrderStatus.DELIVERED).Include(x => x.User);
+                return View(orders);
             }
             return View(_db.Orders.Include(x => x.User));
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) return NotFound();
+            var order = _db.Orders.Include(x => x.User).FirstOrDefault(x => x.Id == id);
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Order obj)
+        {
+            var entity = _db.Orders.Include(x => x.User).FirstOrDefault(x => x.Id == obj.Id);
+            entity.Status = obj.Status;
+            _db.Orders.Update(entity);
+            await _db.SaveChangesAsync();
+            TempData["info"] = "Status atualizado com sucesso!";
+            return RedirectToAction("Index", "Orders");
         }
     }
 }

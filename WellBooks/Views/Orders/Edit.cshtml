@@ -1,0 +1,54 @@
+﻿@using WellBooks.Models.Enums
+@model Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="Edit" style="max-width:480px; margin: auto;">
+    <div class="border mt-4 p-3 text-center">
+        <div class="row pb-3">
+            <h2 class="text-center text-white">Editar pedido # @Model.Id</h2>
+        </div>
+        
+        <div class="form-floating text-dark">
+            <input asp-for="@Model.User" class="form-control" disabled name="user" value="@Model.User.Email">
+            <label asp-for="@Model.User">Cliente</label>
+        </div>
+        
+        <div class="form-floating text-dark">
+            <input asp-for="@Model.Moment" type="date" class="form-control" disabled>
+            <label asp-for="@Model.Moment">Data da compra</label>
+        </div>
+        <label asp-for="Status">Selecione um status: </label>
+        <select class="form-control bg-dark text-white" asp-for="Status">
+            @if(Model.Status == OrderStatus.PENDING)
+            {
+                <option selected value="PENDING">Pendente</option>
+                <option value="SUCCESS">Confirmado</option>
+                <option value="WAITING">Em espera</option>
+                <option value="DELIVERED">Enviando pedido</option>
+            }else if(Model.Status == OrderStatus.SUCCESS)
+            {
+                <option value="PENDING">Pendente</option>
+                <option selected value="SUCCESS">Confirmado</option>
+                <option value="WAITING">Em espera</option>
+                <option value="DELIVERED">Enviando pedido</option>
+            }else if(Model.Status == OrderStatus.WAITING)
+            {
+                <option value="PENDING">Pendente</option>
+                <option value="SUCCESS">Confirmado</option>
+                <option selected value="WAITING">Em espera</option>
+                <option value="DELIVERED">Enviando pedido</option>
+            }else{
+                <option value="PENDING">Pendente</option>
+                <option value="SUCCESS">Confirmado</option>
+                <option value="WAITING">Em espera</option>
+                <option selected value="DELIVERED">Enviando pedido</option>
+            }
+        </select>
+        <div class="mt-2">
+            <button type="submit" class="btn btn-outline-success">Editar pedido</button>
+            <a asp-action="Index" asp-controller="Orders" class="btn btn-info ms-2">Voltar para lista</a>
+        </div>
+    </div>
+</form>

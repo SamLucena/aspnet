@@ -4,7 +4,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<partial name="_Notification"/>
 <div class="row pt-4">
     <div class="col-6">
         <h2>Lista de Pedidos</h2>
@@ -15,6 +15,12 @@
             <div class="dropdown-menu">
                  <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="desc">Mais recente</a>
                  <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="asc">Mais antigo</a>
+                 <div class="dropdown-divider"></div>
+                 <h6 class="dropdown-header">Status</h6>
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="success">Confirmado</a>
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="delivered">Enviando pedido</a>
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="waiting">Em espera</a>
+                 <a class="dropdown-item" asp-action="Index" asp-controller="Orders" asp-route-orderby="pending">Pendente</a>
             </div>
         </div>
     </div>
