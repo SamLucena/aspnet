@@ -1,0 +1,42 @@
+﻿@model Contact
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2 class="fw-bold">Onde estamos?</h2>
+    <div class="col mb-3">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="rounded" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.3304703688136!2d-46.73065228497905!3d-23.520613565973985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef8c1d371ec31%3A0x671c9325c275132e!2sETEC%20Professor%20Basilides%20de%20Godoy.!5e0!3m2!1spt-BR!2sbr!4v1656327132088!5m2!1spt-BR!2sbr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p>R. Guaipá, 678 - Vila Leopoldina, São Paulo - SP, 05089-000</p>
+    </div>
+    <div class="col">
+        <form method="post" class="bg-dark rounded p-3">
+            <fieldset>
+                <legend class="text-center text-white fw-bold">Feedback :)</legend>
+            </fieldset>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Name">Nome completo</label>
+                <input autocomplete="on" type="text" asp-for="Name" class="form-control" placeholder="Digite seu nome completo">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email">Email</label>
+                <input autocomplete="on" type="email" asp-for="Email" class="form-control" placeholder="Digite seu email">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Message">Mensagem</label>
+                <textarea class="form-control" asp-for="Message" cols="12" rows="10" placeholder="Digite sua mensagem aqui!"></textarea>
+            </div>
+            <button type="submit" class="text-center btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

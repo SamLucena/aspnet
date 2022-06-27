@@ -63,7 +63,23 @@ namespace WellBooks.Controllers
         {
             return View();
         }
-       
+
+        [AllowAnonymous]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Contact(Contact obj)
+        {
+            await _db.Contacts.AddAsync(obj);
+            await _db.SaveChangesAsync();
+            TempData["success"] = "Mensagem enviada com sucesso!";
+            return RedirectToAction("Index", "Home");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
