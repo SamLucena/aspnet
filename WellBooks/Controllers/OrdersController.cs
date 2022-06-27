@@ -92,6 +92,22 @@ namespace WellBooks.Controllers
             return View(order);
         }
 
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            var order = _db.Orders.Include(x => x.User).FirstOrDefault(x => x.Id == id);
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Order obj)
+        {
+            _db.Remove(obj);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index", "Orders");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Order obj)
