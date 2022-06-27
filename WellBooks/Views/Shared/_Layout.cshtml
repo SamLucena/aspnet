@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-3">
           <div class="container-fluid">
             <a class="navbar-brand" asp-action="Index" asp-controller="Home">Wellbooks</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
               </ul>
               <form class="d-flex me-3" asp-action="Index" asp-controller="Home">
                 <input class="form-control me-sm-2" type="text" placeholder="O que você deseja?" name="query">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" asp-action="Index" asp-controller="Home">Buscar</button>
+                <button class="btn btn-success my-2 my-sm-0" type="submit" asp-action="Index" asp-controller="Home">Buscar</button>
               </form>
               <partial name="_LoginPartial"/>
             </div>
@@ -47,9 +47,9 @@
         </main>
     </div>
 
-    <footer class="bg-dark footer text-muted">
+    <footer class="bg-primary footer text-white">
         <div class="container">
-            &copy; 2022 - WellBooks - <a asp-area="" asp-controller="Home" asp-action="About">Privacy</a>
+            &copy; 2022 - WellBooks
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -2,21 +2,21 @@
 @using WellBooks.ViewModels
 @if(User.HasClaim("Role", "employee")){
     <form method="post" asp-action="Logout" asp-controller="Account">
-        <a asp-controller="Account" asp-action="Profile" class="btn btn-primary text-dark ml-2">
+        <a asp-controller="Account" asp-action="Profile" class="btn btn-light text-dark ml-2">
             <i class="bi bi-file-person"></i>
             <strong>@User.Identity.Name</strong>
         </a>
-        <a class="ml-2 btn btn-outline-info" asp-action="Dashboard" asp-controller="Employee"><i class="bi bi-bar-chart-line-fill"></i> Dashboard</a>
-        <button type="submit" class="ml-2 btn btn-outline-danger"><i class="bi bi-x-circle-fill"></i></button>
+        <a class="ml-2 btn btn-info" asp-action="Dashboard" asp-controller="Employee"><i class="bi bi-bar-chart-line-fill"></i> Dashboard</a>
+        <button type="submit" class="ml-2 btn btn-danger"><i class="bi bi-x-circle-fill"></i></button>
     </form>
 }else if (User.Identity.IsAuthenticated)
 {
     <form method="post" asp-action="Logout" asp-controller="Account">
-        <a asp-controller="Account" asp-action="Profile" class="btn btn-primary text-dark ml-2">
+        <a asp-controller="Account" asp-action="Profile" class="btn btn-light text-dark ml-2">
             <i class="bi bi-file-person"></i>
             <strong>@User.Identity.Name</strong>
         </a>
-        <a asp-controller="OrderDetails" asp-action="Index" class="btn btn-info ml-2">
+        <a asp-controller="OrderDetails" asp-action="Index" class="btn btn-success ml-2">
             <i class="bi bi-bag"></i>
         </a>
         <button type="submit" class="ml-2 btn btn-outline-danger"><i class="bi bi-x-circle-fill"></i></button>
