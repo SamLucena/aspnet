@@ -5,14 +5,14 @@ namespace WellBooks.ViewModel
 {
     public class SignUpViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo email é obrigatório")]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo senha é obrigatório")]
         public string Password { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Confirme a senha")]
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string PasswordConfirm { get; set; }

@@ -6,7 +6,7 @@ namespace WellBooks.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo nome é obrigatório")]
         [MinLength(5)]
         public string Name { get; set; }
     }
